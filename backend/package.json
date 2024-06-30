@@ -5,8 +5,7 @@
   "main": "index.js",
   "type": "commonjs",
   "scripts": {
-    "dev": "nodemon -r dotenv/config --experimental-json-modules src/server.js",
-	"start": "node src/server.js"
+    "start": "nodemon -r dotenv/config --experimental-json-modules src/server.js"
   },
   "keywords": [],
   "author": "",

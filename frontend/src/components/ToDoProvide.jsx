@@ -16,32 +16,15 @@ export function ToDoProvide({ children }) {
 	const [todos, dispatch] = useReducer(tasksReducer, []);
 
 	useEffect(() => {
-		// controller.setupTable()
-		// .then(() => {
-		// 	// fetching data
-		// 	controller.fetchData()
-		// })
-		// .catch((error) => {
-		// 	console.log(`error while creating table :(`, error);
-		// })
-		// .then((responseTodos) => {
-		// 	dispatch({
-		// 		type: "set",
-		// 		todos: responseTodos,
-		// 	})
+		// fetching data
+		controller.fetchData()
+		.then((responseTodos) => {
+			dispatch({
+				type: "set",
+				todos: responseTodos,
+			})
+		});
 
-		(async function(){
-			try {
-				await controller.setupTable();
-				const responseTodos = await controller.fetchData();
-				dispatch({
-					type: "set",
-					todos: responseTodos,
-				});
-			} catch (error) {
-				console.log("Error occurred during initial setup! Message:", error);
-			}
-		})();
 		// on cleanup, just clear the list again
 		return () => { dispatch({ type: "clear" }) };
 	}, []);
