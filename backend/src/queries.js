@@ -18,6 +18,9 @@ const queries = {
 	
 	// update task title and/or completed status
 	updateTask: "UPDATE task_table SET title=$1, completed=$2 WHERE id=$3",
+
+	// dummy insert
+	dummyInsert: "INSERT INTO task_table(title, completed) VALUES('Get milk', TRUE), ('Go to Gym', FALSE), ('Study', FALSE)",
 }
 
 module.exports = queries;

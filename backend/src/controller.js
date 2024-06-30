@@ -1,6 +1,14 @@
 const { pool } = require('./db.js');
 const queries = require('./queries.js');
 
+const dummyInsert = async (req, res) => {
+	try {
+		await pool.query(queries.dummyInsert);
+	} catch (error) {
+		res.status(500).send(`ERROR`);
+	}
+}
+
 const getTasks = async (req, res) => {
 	try {
 		const results = await pool.query(queries.getTask);
@@ -73,12 +81,13 @@ const updateTask = async (req, res) => {
 			message: "Successfully updated task!"
 		});
 	} catch (error) {
-		console.log(`Error occured while deleting task of id: "${id}" ! Message: ${error.message}`);
+		console.log(`Error occured while updating task of id: "${id}" ! Message: ${error.message}`);
 		res.status(500).send(`ERROR`);
 	}
 }
 
 module.exports = {
+	dummyInsert,
 	getTasks,
 	getTaskById,
 	addTask,
