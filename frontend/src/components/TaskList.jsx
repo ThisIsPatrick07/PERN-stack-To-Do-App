@@ -7,9 +7,11 @@ export default function TaskList(){
 	const todos = useContext(TodosContext);
 	const [incompleteOnly, setIncompleteOnly] = useState(false);
 
+	const tasksRemaining = todos.filter(todo => todo.completed === false).length;
+
 	return (
 		<>
-			<div className="bg-white">
+			<div className="bg-white my-4 text-center">
 				<input 
 					type="checkbox" 
 					name="incomplete-tasks-only" 
@@ -19,6 +21,9 @@ export default function TaskList(){
 				/>
 				<label htmlFor="incompleteOnly">Only Incomplete Tasks</label>
 			</div>
+			<span
+				className="mx-auto"
+			>{tasksRemaining !== 0 ? `${tasksRemaining} Tasks remaining` : "Hurray! All tasks completed 🥳"}</span>
 			<ul className="w-full my-10 border-blue-600 border-2">
 				{todos.map(todo => (
 					!(incompleteOnly & todo.completed) && (<li key={todo.id}>
