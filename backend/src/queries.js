@@ -6,6 +6,9 @@ const queries = {
 
 	// display tasks
 	getTask: "SELECT * FROM task_table ORDER BY id;",
+
+	// // display ONLY the incomplete tasks
+	// getCompletedTasks: "SELECT * FROM task_table WHERE completed=FALSE",
 	
 	// display task by ID
 	getTaskById: "SELECT * FROM task_table WHERE id=$1;",
