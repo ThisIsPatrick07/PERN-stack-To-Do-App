@@ -1,12 +1,13 @@
-const { pool } = require('./db.js');
+const pool  = require('./db.js');
 const queries = require('./queries.js');
+const table_name = require("./constants.js");
 
 const getTasks = async (req, res) => {
 	try {
 		const results = await pool.query(queries.getTask);
 		res.status(200).json(results.rows);
 	} catch (error) {
-		console.log(`Error occured while getting tasks! Message: ${error.message}`);
+		console.log(`Error occurred while getting tasks! Message: ${error.message}`);
 		res.status(500).send(`ERROR`);
 	}
 };
@@ -24,7 +25,7 @@ const getTaskById = async (req, res) => {
 		// sending the user
 		res.status(200).json(results.rows);
 	} catch (error) {
-		console.log(`Error occured while getting task of id: ${id}! Message: ${error.message}`);
+		console.log(`Error occurred while getting task of id: ${id}! Message: ${error.message}`);
 		res.status(500).send(`ERROR`);
 	}
 };
@@ -38,7 +39,7 @@ const addTask = async (req, res) => {
 			message: `Successfully added task!`,
 		});
 	} catch (error) {
-		console.log(`Error occured while adding task "${title}" ! Message: ${error.message}`);
+		console.log(`Error occurred while adding task "${title}" ! Message: ${error.message}`);
 		res.status(500).send(`ERROR`);
 	}
 };
@@ -57,7 +58,7 @@ const removeTask = async (req, res) => {
 			message: "Successfully deleted task!",
 		})
 	} catch (error) {
-		console.log(`Error occured while deleting task of id: "${id}" ! Message: ${error.message}`);
+		console.log(`Error occurred while deleting task of id: "${id}" ! Message: ${error.message}`);
 		res.status(500).send(`ERROR`);
 	}
 };
@@ -65,15 +66,25 @@ const removeTask = async (req, res) => {
 const updateTask = async (req, res) => {
 	const id = parseInt(req.params.id);
 
-	const { title, completed } = req.body;
+	const { title, completed, description } = req.body;
 	try {
-		await pool.query(queries.updateTask, [title, completed, id]);
+		await pool.query(queries.updateTask, [id, title, completed, description]);
 		res.status(200).json({
 			success: true,
 			message: "Successfully updated task!"
 		});
 	} catch (error) {
-		console.log(`Error occured while deleting task of id: "${id}" ! Message: ${error.message}`);
+		console.log(`Error occurred while updating task of id: "${id}" ! Message: ${error.message}`);
+		res.status(500).send(`ERROR`);
+	}
+}
+
+const setupDatabase = async (req, res) => {
+	try {
+		await pool.query(queries.createTableQuery);
+		res.status(200).send(`Database successfully created!!`);
+	} catch (error) {
+		console.log(`Error occurred while creating table! Message: ${error.message}`);
 		res.status(500).send(`ERROR`);
 	}
 }
@@ -84,4 +95,6 @@ module.exports = {
 	addTask,
 	removeTask,
 	updateTask,
+	// addColumn,
+	setupDatabase,
 }

@@ -1,26 +1,24 @@
-const table_name = process.env.TASK_TABLE_NAME || "task_table";
+const { table_name } = require("./constants.js");
+
 
 const queries = {
 	// create table
-	createTableQuery : "CREATE TABLE task_table (id SERIAL PRIMARY KEY, title VARCHAR(255), completed BOOLEAN);",
+	createTableQuery : `CREATE TABLE ${table_name} (id SERIAL PRIMARY KEY, title VARCHAR(100) NOT NULL, completed BOOLEAN NOT NULL, description VARCHAR(500));`,
 
 	// display tasks
-	getTask: "SELECT * FROM task_table ORDER BY id;",
-
-	// // display ONLY the incomplete tasks
-	// getCompletedTasks: "SELECT * FROM task_table WHERE completed=FALSE",
+	getTask: `SELECT * FROM ${table_name} ORDER BY id;`,
 	
 	// display task by ID
-	getTaskById: "SELECT * FROM task_table WHERE id=$1;",
+	getTaskById: `SELECT * FROM ${table_name} WHERE id=$1;`,
 	
 	// add task
-	addTask: "INSERT INTO task_table (title, completed) VALUES($1, FALSE)",
+	addTask: `INSERT INTO ${table_name} (title, completed) VALUES($1, FALSE);`,
 	
 	// delete task
-	removeTask: "DELETE FROM task_table WHERE id=$1",
+	removeTask: `DELETE FROM ${table_name} WHERE id=$1;`,
 	
 	// update task title and/or completed status
-	updateTask: "UPDATE task_table SET title=$1, completed=$2 WHERE id=$3",
+	updateTask: `UPDATE ${table_name} SET title=$2, completed=$3, description=$4 WHERE id=$1;`,
 }
 
 module.exports = queries;
