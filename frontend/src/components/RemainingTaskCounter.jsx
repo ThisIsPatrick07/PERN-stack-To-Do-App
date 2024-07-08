@@ -12,16 +12,17 @@ function RemainingTaskCounter({ todosEmpty }) {
 		if (todosEmpty){
 			displayMessage = ( <p>Add some tasks to get started! <span>☝️</span></p> )
 		}
+		
 		else if(tasksRemaining === 0){
 			displayMessage = ( <p>Hurray! All tasks completed! <span>🥳</span></p> );
 		} else if(tasksRemaining <= 3) {
 			if(tasksRemaining === 1){
-				displayMessage = ( <p className="text-red-300">{tasksRemaining} Task remaining (Almost There!)</p> )
+				displayMessage = ( <><span className="text-red-300">{tasksRemaining}</span> Task remaining (Almost There!)</> )
 			} else{
-				displayMessage = ( <p className="text-red-300">{tasksRemaining} Tasks remaining (Almost There!)</p> )
+				displayMessage = ( <><span className="text-red-300">{tasksRemaining}</span> Tasks remaining (Almost There!)</> )
 			}
 		} else{
-			displayMessage = ( <p className="text-red-300">{tasksRemaining} Tasks remaining</p>);
+			displayMessage = ( <><span className="text-red-300">{tasksRemaining}</span> Tasks remaining</> );
 		}
 	
 		return displayMessage;

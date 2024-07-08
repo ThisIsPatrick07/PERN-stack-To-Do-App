@@ -1,7 +1,6 @@
 /* eslint-disable */
 
 import { useEffect, useState } from "react"
-import Task from "./Task";
 import CompletedHeader from "./CompletedHeader";
 import CompletedTasks from "./CompletedTasks";
 

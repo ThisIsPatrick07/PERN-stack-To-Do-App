@@ -1,5 +1,5 @@
 /* eslint-disable */
-import Task from "./Task"
+import Task from "../Task"
 
 function CompletedTasks({ completedTasks }) {
 	return (
