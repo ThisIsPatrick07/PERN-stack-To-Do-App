@@ -1,19 +1,17 @@
 /* eslint-disable react/prop-types */ // TODO: upgrade to latest eslint tooling
 
-import { createContext, useEffect, useReducer } from "react";
+import { createContext, useEffect, useReducer, useState } from "react";
 import controller from "../utils/utils.js";
 
 export const TodosContext = createContext(null);
 export const TaskDispatchContext = createContext(null);
-
-// const initTasks = [
-// 	{id: 0, title: "Get milk", completed: false},
-// 	{id: 1, title: "Play basketball", completed: false},
-// 	{id: 2, title: "Study for exam", completed: false},
-// ];
+export const TasksRemainingContext = createContext(null);
 
 export function ToDoProvide({ children }) {
 	const [todos, dispatch] = useReducer(tasksReducer, []);
+
+	const [tasksRemaining, setTasksRemaining] = useState(0);
+	function handleSetTasksRemaining(todos) { setTasksRemaining(todos.filter(todo => !todo.completed).length); }
 
 	useEffect(() => {
 		// fetching data
@@ -23,8 +21,8 @@ export function ToDoProvide({ children }) {
 				type: "set",
 				todos: responseTodos,
 			})
+			handleSetTasksRemaining(responseTodos);
 		});
-
 		// on cleanup, just clear the list again
 		return () => { dispatch({ type: "clear" }) };
 	}, []);
@@ -32,7 +30,9 @@ export function ToDoProvide({ children }) {
 	return (
 		<TodosContext.Provider value={todos}>
 			<TaskDispatchContext.Provider value={dispatch}>
-				{children}
+				<TasksRemainingContext.Provider value={{ tasksRemaining, handleSetTasksRemaining }}>
+					{children}
+				</TasksRemainingContext.Provider>
 			</TaskDispatchContext.Provider>
 		</TodosContext.Provider>
 	);

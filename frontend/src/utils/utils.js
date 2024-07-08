@@ -32,11 +32,12 @@ async function deleteTask(id){
 	}
 }
 
-async function updateTask(id, title, completed){
+async function updateTask(id, title, completed, description){
 	try {
 		const successMsg = await axios.put(`/api/tasks/${id}`, {
 			title: title,
 			completed: completed,
+			description: description,
 		});
 		return successMsg.data.message;
 	} catch (error) {
