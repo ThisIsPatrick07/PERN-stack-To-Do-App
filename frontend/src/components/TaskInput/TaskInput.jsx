@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */ // TODO: upgrade to latest eslint tooling
 import { useContext, useState } from "react";
-import { TaskDispatchContext, TasksRemainingContext } from "./ToDoProvide";
-import controller from "../utils/utils.js";
+import { TaskDispatchContext, TasksRemainingContext } from "../ToDoProvide.jsx";
+import controller from "../../utils/utils.js";
 
 export default function TaskInput(){
 	const [title, setTitle] = useState("");
@@ -11,7 +11,7 @@ export default function TaskInput(){
 
 	function handleAddTask(title){
 		if (title.trim() === ""){
-			alert("You cannot add empty task!");
+			alert("You cannot add an empty task!");
 		}
 		else{
 			controller.addTask(title)

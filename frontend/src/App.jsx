@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */ // TODO: upgrade to latest eslint tooling
 
-import TaskInput from "./components/TaskInput";
+import TaskInput from "./components/TaskInput/TaskInput";
 import TaskList from "./components/TaskList";
 import { ToDoProvide } from "./components/ToDoProvide";
 

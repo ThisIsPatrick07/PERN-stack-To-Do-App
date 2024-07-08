@@ -19,10 +19,16 @@ export default function Task({ id, todo }){
 
 	const [completed, setCompleted] = useState(todo.completed);
 	const [title, setTitle] = useState(todo.title);
-	const [description, setDescription] = useState(todo.description);
+	const [description, setDescription] = useState(todo.description || "");
 
 	const dispatch = useContext(TaskDispatchContext);
 	const { handleSetTasksRemaining } = useContext(TasksRemainingContext);
+
+	const taskDivStyle = `w-full 
+						flex items-center 
+						py-1 my-1.5 
+						border-solid border-2
+						${completed ? "border-green-600 bg-green-400 rounded-lg" : "border-yellow-600 bg-yellow-400 rounded-lg"}`;
 
 	function handleEditTask(id, title, completed, description, showEditButton){
 		setEditInput(showEditButton);
@@ -122,7 +128,7 @@ export default function Task({ id, todo }){
 
 	return (
 		<div 
-			className="w-full flex items-center py-1 my-1.5 border-solid border-yellow-600 border-2 bg-yellow-400 rounded-lg"
+			className={taskDivStyle}
 			style={{ color: "rgba(10, 0, 74, 0.912)", }}
 		>
 			<input 

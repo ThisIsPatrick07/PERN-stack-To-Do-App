@@ -46,6 +46,8 @@ async function updateTask(id, title, completed, description){
 	}
 }
 
+
+
 export default {
 	fetchData,
 	addTask,
