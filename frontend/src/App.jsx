@@ -3,8 +3,8 @@
 import Header from "./components/Header/Header";
 import Main from "./components/Main/Main";
 import TaskInput from "./components/TaskInput/TaskInput";
-import TaskList from "./components/TaskList";
-import { ToDoProvide } from "./components/ToDoProvide";
+import TaskList from "./components/TaskList/TaskList";
+import { ToDoProvide } from "./components/ToDoProvide/ToDoProvide";
 
 export default function App() {
 	return (

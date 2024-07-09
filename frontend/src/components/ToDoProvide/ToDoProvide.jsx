@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */ // TODO: upgrade to latest eslint tooling
 
 import { createContext, useEffect, useReducer, useState } from "react";
-import controller from "../utils/utils.js";
+import controller from "../../utils/utils.js";
 
 export const TodosContext = createContext(null);
 export const TaskDispatchContext = createContext(null);
@@ -16,13 +16,13 @@ export function ToDoProvide({ children }) {
 	useEffect(() => {
 		// fetching data
 		controller.fetchData()
-		.then((responseTodos) => {
-			dispatch({
-				type: "set",
-				todos: responseTodos,
-			})
-			handleSetTasksRemaining(responseTodos);
-		});
+			.then((responseTodos) => {
+				dispatch({
+					type: "set",
+					todos: responseTodos,
+				})
+				handleSetTasksRemaining(responseTodos);
+			});
 		// on cleanup, just clear the list again
 		return () => { dispatch({ type: "clear" }) };
 	}, []);
